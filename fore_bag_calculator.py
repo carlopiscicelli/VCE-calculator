@@ -5,16 +5,21 @@ import numpy as np
 def predict_vce_success(fore_bag, bmi, parity):
     """
     Modello di regressione logistica basato sullo studio.
-    Il modello utilizza tre variabili per stimare la probabilità di successo.
     """
-    intercept = -5.0  # Intercetta del modello (stimata dallo studio)
-    coef_fore_bag = 3.2  # Coefficiente Fore-bag
-    coef_bmi = -0.5  # Coefficiente BMI
-    coef_parity = 1.1  # Coefficiente Parità
+    intercept = -2.0  # Intercetta meno estrema
+    coef_fore_bag = 1.5  # Coefficiente ridotto
+    coef_bmi = -0.2  # Minore impatto del BMI
+    coef_parity = 0.8  # Aumento dell'effetto della parità
 
-    # Calcolo della probabilità usando la regressione logistica
+    # Calcolo del valore logit
     logit = intercept + (coef_fore_bag * fore_bag) + (coef_bmi * bmi) + (coef_parity * parity)
-    probability = 1 / (1 + np.exp(-logit))  # Funzione sigmoide
+    
+    # Calcolo della probabilità usando la funzione sigmoide
+    probability = 1 / (1 + np.exp(-logit))
+
+    # Debug: Mostra i valori intermedi
+    st.write(f"🔍 Logit: {logit}")  # Mostra il valore del logit
+    st.write(f"📊 Probabilità calcolata: {probability}")  # Mostra il valore della probabilità
 
     return probability
 
@@ -33,3 +38,4 @@ if st.button("🔎 Calcola Probabilità"):
     st.success(f"📊 Probabilità stimata di successo: {probability*100:.1f}%")
 
 st.markdown("*Nota: il modello è stato validato internamente, ma potrebbe necessitare di ulteriori test in popolazioni diverse.*")
+
