@@ -6,10 +6,10 @@ def predict_vce_success(fore_bag, bmi, parity):
     """
     Modello di regressione logistica basato sullo studio.
     """
-    intercept = -2.0  # Intercetta meno estrema
-    coef_fore_bag = 1.5  # Coefficiente ridotto
-    coef_bmi = -0.2  # Minore impatto del BMI
-    coef_parity = 0.8  # Aumento dell'effetto della parità
+    intercept = -1.0  # Meno negativo per aumentare la probabilità
+    coef_fore_bag = 2.0  # Maggiore impatto della dimensione Fore-bag
+    coef_bmi = -0.1  # Ridotta influenza del BMI
+    coef_parity = 1.0  # Maggiore influenza della parità
 
     # Calcolo del valore logit
     logit = intercept + (coef_fore_bag * fore_bag) + (coef_bmi * bmi) + (coef_parity * parity)
@@ -18,10 +18,11 @@ def predict_vce_success(fore_bag, bmi, parity):
     probability = 1 / (1 + np.exp(-logit))
 
     # Debug: Mostra i valori intermedi
-    st.write(f"🔍 Logit: {logit}")  # Mostra il valore del logit
-    st.write(f"📊 Probabilità calcolata: {probability}")  # Mostra il valore della probabilità
+    st.write(f"🔍 Logit: {logit}")
+    st.write(f"📊 Probabilità calcolata: {probability}")
 
     return probability
+
 
 # Interfaccia Streamlit
 st.title("🔍 Calcolatore di Successo della Versione Cefalica Esterna")
