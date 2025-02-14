@@ -14,8 +14,8 @@ successo.
     coef_parity = 1.1  # Coefficiente Parità
 
     # Calcolo della probabilità usando la regressione logistica
-    logit = intercept + (coef_fore_bag * fore_bag) + (coef_bmi * bmi) + 
-(coef_parity * parity)
+    logit = intercept + (coef_fore_bag * fore_bag) + (coef_bmi * bmi) + (coef_parity * parity)
+
     probability = 1 / (1 + np.exp(-logit))  # Funzione sigmoide
 
     return probability
